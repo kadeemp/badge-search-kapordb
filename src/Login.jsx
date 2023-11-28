@@ -21,7 +21,6 @@ import { useNavigate } from "react-router-dom";
 
 function Login(props) {
 
-  const profilesCollectionRef = collection(db,"profiles")
   const navigate = useNavigate();
   let isAuthenticated = localStorage.getItem(`authenticated`)
   const [loginEmail, setLoginEmail] = useState("");
