@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 const ProfileCard = (props) =>  {
 const Nav = useNavigate();
 const badgeStyle = { width: '180px', height: '180px' };
-console.log('c1Complete:', props);
 
 return (
       <div>
@@ -17,7 +16,7 @@ return (
           <div className="card-body" style={{textAlign: "left"}}>
 
             <div style={{display:"inline"}}>
-                <h2></h2> <h3>Name: {props.fname} {props.lname}</h3>
+                <h2></h2> <h3>{props.fname} {props.lname}</h3>
             </div>
             <div style={{display: 'flex', alignItems: 'center' }} >
             {props.c1Complete && (
@@ -45,9 +44,6 @@ return (
             {/*  */}
               <Link to={'/edit-profile/' + props.id}>
                 <button className="btn btn-primary" style={{textAlign: "center", margin:"10px"}}>Edit Profile</button>
-              </Link>
-              <Link to={'/add-certificate-to-profile'}>
-                <button className="btn btn-primary" style={{textAlign: "center"}}>Add Certificate </button>
               </Link>
             </div>
             <div >

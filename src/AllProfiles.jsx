@@ -36,6 +36,7 @@ function AllProfiles() {
         c2Complete={profile.c2Complete}
         c3Complete={profile.c3Complete}
         c4Complete={profile.c4Complete}
+        id={profile.profileID}
       />
     );
   }

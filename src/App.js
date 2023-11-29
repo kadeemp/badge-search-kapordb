@@ -8,6 +8,7 @@ import Footer from "./Footer"
 import Header from './Header';
 import CertSearch from "./CertSearch"
 import AllProfiles from './AllProfiles'
+import EditProfile from './EditProfile'
 
 // import { Notifications } from 'react-push-notification';
 import AddProfile from './AddProfile'
@@ -25,6 +26,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/add-profile" element={<AddProfile/>}/>
         <Route path="/all-profiles"element={<AllProfiles/>}/>
+        <Route path="/edit-profile/:id" element={<EditProfile/>}/>
 
         </Routes>
 
