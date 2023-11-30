@@ -17,8 +17,11 @@ const Header = () => {
           />
         </Link>
         <div style={{ float: 'right', display: 'flex', padding: 20 }}>
-          <a href="https://www.kapordeibcertificate.com/" style={{ padding: 20, color: "#FFFFFF", textDecoration: "none" }}>
-            DEIB Certificate Program
+          <a href="https://www.deibforstartups.com/" style={{ padding: 20, color: "#FFFFFF", textDecoration: "none" }}>
+            DEIB for Startups
+          </a>
+          <a href="https://diversityadvocates.com/" style={{ padding: 20, color: "#FFFFFF", textDecoration: "none" }}>
+            Diversity Advocates
           </a>
           <a href="https://www.kaporcenter.org/" style={{ padding: 20, color: "#FFFFFF", textDecoration: "none" }}>
             Kapor Center

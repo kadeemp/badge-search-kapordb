@@ -7,15 +7,15 @@ import { useState, useEffect } from "react";
 
 const ProfileCard = (props) =>  {
 const Nav = useNavigate();
-const badgeStyle = { width: '180px', height: '180px' };
+const badgeStyle = { width: '270px', height: '270px' };
 
 return (
       <div>
         <div className="card" style={{margin:"auto", width:"50%", marginBottom:"20px"}}>
-          <h5 className="card-title" style={{paddingTop:"20px", paddingLeft:"20px"}} >Profile Card</h5>
+          <h5 className="card-title" style={{paddingTop:"20px", paddingLeft:"20px", textAlign: 'center' }} ></h5>
           <div className="card-body" style={{textAlign: "left"}}>
 
-            <div style={{display:"inline"}}>
+            <div style={{display:"inline", textAlign: 'center' }}>
                 <h2></h2> <h3>{props.fname} {props.lname}</h3>
             </div>
             <div style={{display: 'flex', alignItems: 'center' }} >

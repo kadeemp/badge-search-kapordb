@@ -42,7 +42,7 @@ function AllProfiles() {
   }
 
   return (
-    <div>
+    <div style={{ textAlign: 'center'}}>
       <h1>All Profiles</h1>
       {loading ? (
         <p>Loading profiles...</p>
