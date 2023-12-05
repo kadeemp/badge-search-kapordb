@@ -6,7 +6,6 @@ import Login from "./Login"
 import Register from "./Register"
 import Footer from "./Footer"
 import Header from './Header';
-import CertSearch from "./CertSearch"
 import AllProfiles from './AllProfiles'
 import EditProfile from './EditProfile'
 import SearchProfiles from './SearchProfiles'
@@ -15,21 +14,23 @@ import AddProfile from './AddProfile'
 import Profile from './Profile'
 
 
+
 function App() {
   return (
     <div className="App">
         <Header/>
 
-        <Routes>
-        <Route exact path="/" element={<SearchProfiles/>}/>
-        // <Route path="/register" element={<Register/>}/>
-        <Route path="/login" element={<Login/>} />
-        <Route path="/add-profile" element={<AddProfile/>}/>
-        <Route path="/all-profiles"element={<AllProfiles/>}/>
-        <Route path="/edit-profile/:id" element={<EditProfile/>}/>
-        <Route path="/profile/:id" element={<Profile/>}/>
+                <Routes>
 
-        </Routes>
+                        <Route exact path="/" element={<SearchProfiles/>}/>
+                        // <Route path="/register" element={<Register/>}/>
+                        <Route path="/login" element={<Login/>} />
+                        <Route path="/add-profile" element={<AddProfile/>}/>
+                        <Route path="/all-profiles"element={<AllProfiles/>}/>
+                        <Route path="/edit-profile/:id" element={<EditProfile/>}/>
+                        <Route path="/profile/:id" element={<Profile/>}/>
+
+                </Routes>
 
         <Footer/>
     </div>
