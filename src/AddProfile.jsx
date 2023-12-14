@@ -14,7 +14,7 @@ import {
 import { db } from './firebase.js'
 import { v4 } from "uuid";
 import { storage } from "./firebase";
-import { useState } from "react";
+import { useState, useEffect  } from "react";
 
 
 function AddProfile(props) {
@@ -26,10 +26,25 @@ function AddProfile(props) {
   const [hasCompletedCourse2, setHasCompletedCourse2] = useState(false)
   const [hasCompletedCourse3, setHasCompletedCourse3] = useState(false)
   const [hasCompletedCourse4, setHasCompletedCourse4] = useState(false)
+  const [nextId, setNextId] = useState('');
 
   function reloadPage() {
     window.location.reload(false)
   }
+
+  useEffect(() => {
+  // Fetch the profiles to get the count
+  const fetchProfiles = async () => {
+    const querySnapshot = await getDocs(profilesCollectionRef);
+    const count = querySnapshot.size + 1;
+
+    // Generate the next ID
+    const nextId = `#${count.toString().padStart(5, '0')}`;
+    setNextId(nextId);
+  };
+
+  fetchProfiles();
+}, [profilesCollectionRef]);
 
 function test() {
 
@@ -60,6 +75,7 @@ function handleClick(event) {
     c2Complete: hasCompletedCourse2,
     c3Complete: hasCompletedCourse3,
     c4Complete: hasCompletedCourse4,
+    badgeID:nextId
   }).then(() => {
     // Successfully added document
     console.log("Profile added successfully");

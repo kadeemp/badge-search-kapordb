@@ -2,7 +2,7 @@ import React from "react"
 import {
   collection,
   getDocs,
-  doc,
+  updateDoc,
 } from "firebase/firestore";
 import { db, auth } from './firebase.js'
 import { useState, useEffect } from "react";
@@ -64,6 +64,43 @@ function goToAddProfile() {
 
 }
 
+const addIdToProfiles = async () => {
+  try {
+    // Get the profiles collection reference
+    const profilesCollectionRef = collection(db, 'profiles');
+
+    // Get all documents from the collection
+    const querySnapshot = await getDocs(profilesCollectionRef);
+
+    // Sort documents alphabetically based on the 'fname' attribute
+    const sortedDocs = querySnapshot.docs.sort((a, b) => {
+      const nameA = a.data().fname.toLowerCase();
+      const nameB = b.data().fname.toLowerCase();
+      return nameA.localeCompare(nameB);
+    });
+
+    // Create an array to store update promises
+    const updatePromises = [];
+
+    // Add 'iD' attribute to each document with the format '#00000'
+    sortedDocs.forEach((doc, index) => {
+      const paddedIndex = String(index + 1).padStart(5, '0');
+      const newId = `#${paddedIndex}`;
+
+      // Create an update promise and push it to the array
+      const updatePromise = updateDoc(doc.ref, { badgeID: newId });
+      updatePromises.push(updatePromise);
+    });
+
+    // Wait for all update promises to resolve
+    await Promise.all(updatePromises);
+
+    console.log('IDs added successfully.');
+  } catch (error) {
+    console.error('Error adding IDs:', error);
+  }
+};
+
 async function logout() {
   await signOut(auth);
   localStorage.setItem(`authenticated`, "false")
@@ -85,6 +122,9 @@ console.log("logged out");
       <button className="btn btn-primary" style={{textAlign: "center"}} onClick={goToAddProfile} style={{paddingBottom: "10px", paddingTop: "10px"}}>Add Profile</button>
 
       <button className="btn btn-primary" style={{textAlign: "center"}} onClick={logout} style={{paddingBottom: "10px", paddingTop: "10px"}}>Logout</button>
+
+      <button className="btn btn-primary" style={{textAlign: "center"}} onClick={addIdToProfiles} style={{paddingBottom: "10px", paddingTop: "10px"}}>Update Profiles</button>
+
       <br/>
       <br/>
       <br/>
