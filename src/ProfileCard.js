@@ -21,12 +21,12 @@ return (
             <div style={{display: 'flex', alignItems: 'center' }} >
             {props.c1Complete && (
               <div>
-                <img style={badgeStyle} src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F1-CreatingCulture.png?alt=media&token=cff9bbcf-af69-44aa-a386-13fd3c10358f`} alt="Badge 1" />
+                <img style={badgeStyle} src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F2-FoundationalKnowledge.png?alt=media&token=12dd78d9-5588-472d-b15a-879d20bd57ec`} alt="Badge 1" />
               </div>
             )}
             {props.c2Complete && (
               <div>
-                <img style={badgeStyle} src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F2-FoundationalKnowledge.png?alt=media&token=12dd78d9-5588-472d-b15a-879d20bd57ec`} alt="Badge 2" />
+                <img style={badgeStyle} src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F1-CreatingCulture.png?alt=media&token=cff9bbcf-af69-44aa-a386-13fd3c10358f`} alt="Badge 2" />
               </div>
             )}
             {props.c3Complete && (

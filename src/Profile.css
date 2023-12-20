@@ -1,0 +1,17 @@
+/* Profile.css */
+.badge-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+  min-width: 100px;
+}
+
+@media (max-width: 768px) {
+  .badge-container {
+    flex-direction: column; /* Change to column on small screens */
+    align-items: center; /* Center the badges vertically */
+    margin: 0 auto;
+    text-align: center;
+  }
+}
