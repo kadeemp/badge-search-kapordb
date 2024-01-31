@@ -86,6 +86,7 @@ const badgeContainerStyles = {
      marginBottom: '20px',
      border: `2px solid ${themeColors.border}`,
      backgroundColor: themeColors.background,
+    borderRadius: '15px'
    },
    cardTitle: {
      paddingTop: '20px',
@@ -104,7 +105,7 @@ const badgeContainerStyles = {
 
    button: {
      width: '100%',
-     padding: '10px',
+     padding: '0px',
      backgroundColor: themeColors.primary,
      color: 'white',
      border: 'none',
@@ -131,8 +132,7 @@ const badgeContainerStyles = {
       display: 'flex',
       justifyContent: 'center', // centers the button horizontally
       alignItems: 'center', // centers the button vertically
-      width: '100%',
-      marginTop: '10px', // optional, adjust as needed
+      width: '100%'
     },
 
  };
@@ -195,13 +195,17 @@ const badgeContainerStyles = {
                 {profileData.c1Complete && profileData.c2Complete && profileData.c3Complete ? (
 
                   <div>
+                  <h3 style={{ textAlign: 'center', marginTop: '20px' }}>Badge Earning Criteria</h3>
+                  <div style={{ marginBottom: '20px' }}>
+                    <p>Badges are awarded to participants who completed 80% or more of each course. </p>
+                    </div>
                   <h3 style={{ textAlign: 'center', marginTop: '20px' }}>How to Download Badge</h3>
                   <div style={{ marginBottom: '20px' }}>
                     <p>Once you've clicked on the link below, you can follow these steps to download each badge:</p>
                     <ul>
                       <li>Right-click any image and choose "Download"</li>
-                      <li>Alternatively, Hover over the image and click the download button (second from the right)</li>
-                      <li>Another alternative: Hover over the image and click the o[tions button to hte far right, then click "Download"</li>
+                      <li>Alternatively, hover over the image and click the download button (second from the right)</li>
+                      <li>Another alternative: Hover over the image and click the options button to the far right, then click "Download</li>
                     </ul>
                     </div>
                   <a href="https://drive.google.com/drive/folders/13ftaqqoQK7MJhLbMmBKfVA3A2_aGKGgO?usp=sharing" target="_blank" style={{ display: 'block', marginTop: '20px' }}>
@@ -215,14 +219,14 @@ const badgeContainerStyles = {
 
                   <h3 style={{ textAlign: 'center', marginTop: '20px' }}>How to Upload Badge to LinkedIn</h3>
                   <div style={{ marginBottom: '20px' }}>
-                    <p>Here's a guide on how to upload your badges to LinkedIn:</p>
+                    <p>To upload your badges to LinkedIn:</p>
                     <ul>
                       <li>Go to your profile</li>
-                      <li>Under your profle photo, click Add profile section</li>
-                      <li>Towards the bottom, click the "Reccomended" row for dropdown options </li>
+                      <li>Under your profile photo, click "Add profile" section</li>
+                      <li>Towards the bottom, click the "Recommended" row for dropdown options </li>
                       <li>Click Add license or certification</li>
                    </ul>
-                     <p>On this page, you'l fill out the information as follows:</p>
+                     <p>On this page, you'll fill out the information as follows:</p>
                      <ul>
                        <li>Name: DEIB for Startups Course Badge Set</li>
                        <li>Issuing organization: Kapor Center </li>
@@ -230,10 +234,10 @@ const badgeContainerStyles = {
                        <li>Credential ID: Enter your Badge ID</li>
                        <li>Credential URL: Enter the url of your badge page.</li>
                      </ul>
-                     <p>Lastly, you'll upload the badge images by clicking "+Add Media", then "Upload Media". Please upload them with the following titles:</p>
+                     <p>Lastly, you'll upload the badge images by clicking "+Add Media", then "Upload Media." Please upload them with the following titles:</p>
                      <ul>
-                       <li>Badge 1: Inclusive Hiring</li>
-                       <li>Badge 2: Foundational Knowledge</li>
+                       <li>Badge 1: Foundational Knowledge</li>
+                       <li>Badge 2: Inclusive Hiring</li>
                        <li>Badge 3: Inclusive Culture</li>
                      </ul>
                     </div>

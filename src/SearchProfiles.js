@@ -41,16 +41,16 @@ const SearchPage = () => {
     <div style={{ textAlign: 'center', fontFamily: 'Arial, sans-serif', color: '#004a99' }}>
     <br/>
     <br/>
-      <div style={{ border: '2px solid #004a99', padding: '20px', margin: '20px auto', maxWidth: '800px', textAlign: 'left', backgroundColor: '#f9f9f9'  }}>
-        <h2 style={{ borderBottom: '1px solid #004a99', paddingBottom: '10px' }}>Welcome to the Badge Verification Platform!</h2>
-        <p style={{ color: 'black'}}>Congratulations to all the trailblazers who've successfully completed the program! Here, we make it easy to verify the courses you've earned credits for.</p>
+      <div style={{ border: '2px solid #004a99', padding: '20px', margin: '20px auto', maxWidth: '800px', textAlign: 'left', backgroundColor: '#f9f9f9', borderRadius: '15px'   }}>
+        <h2 style={{ borderBottom: '1px solid #004a99', paddingBottom: '10px' }}>Welcome to the DEIB for Startups Badge Verification Platform!</h2>
+        <p style={{ color: 'black'}}>Congratulations to all the trailblazers who've successfully completed the program! Here, we make it easy to verify the courses that you have completed.</p>
 
         <h3>How to Verify Your Badges:</h3>
         <ol style={{ marginLeft: '1.5rem' , color: 'black'}}>
           <li>Enter Your First Name (Case Sensitive)</li>
           <li>Click on your Profile to display the badges you've earned</li>
           <li>Enter the password provided to the email you took the course with</li>
-          <li>Update your LinkedIn with the verified badges</li>
+          <li>Update your LinkedIn page with the verified badges</li>
         </ol>
 
         <input

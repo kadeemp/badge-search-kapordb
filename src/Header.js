@@ -8,12 +8,12 @@ const Header = () => {
   return (
     <div style={{ backgroundColor: '#0F2A8E' }}>
       <div>
-        <a href="https://www.kaporcenter.org/">
+        <a href="https://www.kaporcenter.org/kapor-foundation/">
           <img
             alt="Kapor Center"
-            style={{ width: 200, height: 50, padding: 20 }}
+            style={{ width: 200, height: 50, padding: 20, marginLeft: 40 }}
             className={styles.kaporCenterBannerLogo}
-            src="https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/assets%2FKCEN_Primary_One%20Color_White.png?alt=media&token=688fcce7-af88-4b3c-aadf-9d191f2535c0"
+            src="https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/assets%2FKaporFoundation-Brandmark-White.png?alt=media&token=eb2aa460-e558-4c7a-a6fe-1720ee9f7e34"
           />
         </a>
         <div style={{ float: 'right', display: 'flex', padding: 20, fontFamily: 'Proxima Nova, sans-serif' }}>

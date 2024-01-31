@@ -23,20 +23,19 @@ function Login(props) {
 
   const navigate = useNavigate();
   let isAuthenticated = localStorage.getItem(`authenticated`)
-  const [loginEmail, setLoginEmail] = useState("");
+  const [loginEmail, setLoginEmail] = useState("1");
   const [loginPassword, setLoginPassword] = useState("");
 
   const [user, setUser] = useState({});
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-    if (currentUser != null) {
-      localStorage.setItem(`authenticated`, "true")
-      console.log(currentUser.email);
-    }
-
-  });
-
+  // onAuthStateChanged(auth, (currentUser) => {
+  //   setUser(currentUser);
+  //   if (currentUser != null) {
+  //     localStorage.setItem(`authenticated`, "true")
+  //     console.log(currentUser.email);
+  //   }
+  //
+  // });
   const login = async () => {
     try {
       const user = await signInWithEmailAndPassword(
@@ -56,6 +55,7 @@ function Login(props) {
   localStorage.setItem(`authenticated`, "false")
 console.log("logged out");
   setTimeout(navigate("/"), 6000)
+
 };
 
   function reloadPage() {

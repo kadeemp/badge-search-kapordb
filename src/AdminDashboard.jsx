@@ -60,7 +60,7 @@ function goToAllProfiles() {
 }
 
 function goToAddProfile() {
-  Nav("/add-profilex")
+  Nav("/add-profile")
 
 }
 

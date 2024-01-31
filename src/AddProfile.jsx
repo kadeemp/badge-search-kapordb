@@ -93,7 +93,10 @@ function handleClick(event) {
       <br />
       <br />
       <div className="card" style={{ margin: "auto", width: "50%" }}>
-        <h2 className="card-title" style={{ paddingTop: "20px", paddingLeft: "20px" }}>Add Profile</h2>
+        <h2 className="card-title" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", margin: 0 }}>Add Profile</h2>
+                  <br/>
+          <br/>
+          <br/>
         <div className="card-body" style={{ textAlign: "center" }}>
           <div style={{ paddingBottom: "5px", paddingTop: "10px", justifyContent: "space-around" }}>
             <input
@@ -153,22 +156,14 @@ function handleClick(event) {
                 }}
               />
             </div>
-            <div>
-              <h4>Course 4</h4>
-              <input
-                className="form-control"
-                id="course4Status"
-                type="checkbox"
-                checked={hasCompletedCourse4}
-                onChange={(event) => {
-                  setHasCompletedCourse4(event.target.checked);
-                }}
-              />
-            </div>
           </div>
+          <br/>
           <div style={{ marginRight: "10px" }}>
             <button className="btn btn-primary" onClick={handleClick}>Submit</button>
           </div>
+          <br/>
+          <br/>
+          <br/>
         </div>
       </div>
     </div>
