@@ -3,6 +3,7 @@ import {
   collection,
   getDocs,
   updateDoc,
+  writeBatch
 } from "firebase/firestore";
 import { db, auth } from './firebase.js'
 import { useState, useEffect } from "react";
@@ -64,42 +65,28 @@ function goToAddProfile() {
 
 }
 
-const addIdToProfiles = async () => {
+function generatePassword() {
+  return Math.random().toString().slice(2, 7);
+}
+
+async function updateProfilesWithPassword() {
+  const batch = writeBatch(db); // Initialize a write batch
+  const profilesCollectionRef = collection(db, "profiles");
+
   try {
-    // Get the profiles collection reference
-    const profilesCollectionRef = collection(db, 'profiles');
-
-    // Get all documents from the collection
-    const querySnapshot = await getDocs(profilesCollectionRef);
-
-    // Sort documents alphabetically based on the 'fname' attribute
-    const sortedDocs = querySnapshot.docs.sort((a, b) => {
-      const nameA = a.data().fname.toLowerCase();
-      const nameB = b.data().fname.toLowerCase();
-      return nameA.localeCompare(nameB);
+    const snapshot = await getDocs(profilesCollectionRef);
+    snapshot.docs.forEach((doc) => {
+      const password = generatePassword(); // Generate a unique 5-digit password for each document
+      const docRef = doc.ref; // Get a reference to the document
+      batch.update(docRef, { password: password }); // Add this document to the batch update
     });
 
-    // Create an array to store update promises
-    const updatePromises = [];
-
-    // Add 'iD' attribute to each document with the format '#00000'
-    sortedDocs.forEach((doc, index) => {
-      const paddedIndex = String(index + 1).padStart(5, '0');
-      const newId = `#${paddedIndex}`;
-
-      // Create an update promise and push it to the array
-      const updatePromise = updateDoc(doc.ref, { badgeID: newId });
-      updatePromises.push(updatePromise);
-    });
-
-    // Wait for all update promises to resolve
-    await Promise.all(updatePromises);
-
-    console.log('IDs added successfully.');
+    await batch.commit(); // Commit the batch update
+    console.log('All profiles have been updated with a new password.');
   } catch (error) {
-    console.error('Error adding IDs:', error);
+    console.error("Error updating profiles:", error);
   }
-};
+}
 
 async function logout() {
   await signOut(auth);
@@ -123,7 +110,7 @@ console.log("logged out");
 
       <button className="btn btn-primary" style={{textAlign: "center"}} onClick={logout} style={{paddingBottom: "10px", paddingTop: "10px"}}>Logout</button>
 
-      <button className="btn btn-primary" style={{textAlign: "center"}} onClick={addIdToProfiles} style={{paddingBottom: "10px", paddingTop: "10px"}}>Update Profiles</button>
+      <button className="btn btn-primary" style={{textAlign: "center"}} onClick={updateProfilesWithPassword} style={{paddingBottom: "10px", paddingTop: "10px"}}>Update Profiles</button>
 
       <br/>
       <br/>

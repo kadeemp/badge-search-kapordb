@@ -11,8 +11,9 @@ import EditProfile from './EditProfile'
 import SearchProfiles from './SearchProfiles'
 // import { Notifications } from 'react-push-notification';
 import AddProfile from './AddProfile'
+import AddSampleProfile from './AddSampleProfile'
 import Profile from './Profile'
-
+import PasswordRequest from './PasswordRequest'
 
 
 function App() {
@@ -26,10 +27,12 @@ function App() {
                         // <Route path="/register" element={<Register/>}/>
                         <Route path="/login" element={<Login/>} />
                         <Route path="/add-profile" element={<AddProfile/>}/>
+                        <Route path="/add-SampleProfile" element={<AddProfile/>}/>
                         <Route path="/all-profiles"element={<AllProfiles/>}/>
                         <Route path="/edit-profile/:id" element={<EditProfile/>}/>
                         <Route path="/profile/:id" element={<Profile/>}/>
                         <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
+                        <Route path="/request-password" element={<PasswordRequest/>}/>
 
                 </Routes>
 

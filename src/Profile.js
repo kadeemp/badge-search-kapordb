@@ -12,6 +12,7 @@ const Profile = () => {
   const [profileData, setProfileData] = useState({
     fname: '',
     lname: '',
+    password: '',
     id: '',
     date: '',
     badgeID:'',
@@ -32,12 +33,17 @@ const Profile = () => {
   };
 
   const checkPassword = () => {
-    if (password === "Kapor") {
+
+    if (profileData.password === password) {
       setIsPasswordCorrect(true);
     } else {
       setIsPasswordCorrect(false);
     }
   };
+
+  const toRequestPassword = () => {
+    navigate("/request-password")
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,12 +62,8 @@ const Profile = () => {
   const BadgeContainer = ({ children }) => (
     <div className="badge-container">{children}</div>
   );
-const badgeContainerStyles = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  marginBottom: '20px',
-};
+
+
 
   // Helper component to render badge download buttons
   const BadgeDownloadButton = ({ badgeNumber, url }) => (
@@ -81,12 +83,12 @@ const badgeContainerStyles = {
 
  const styles = {
    card: {
-     margin: '30px auto 20px',
-     width: '700px',
+     margin: '30px auto 30px',
+     width: '70%',
      marginBottom: '20px',
      border: `2px solid ${themeColors.border}`,
      backgroundColor: themeColors.background,
-    borderRadius: '15px'
+     borderRadius: '15px'
    },
    cardTitle: {
      paddingTop: '20px',
@@ -95,8 +97,8 @@ const badgeContainerStyles = {
      textAlign: 'center'
    },
    cardBody: {
-     textAlign: 'left',
-     padding: '20px',
+     textAlign: 'center',
+     padding: '25px',
    },
    badgeStyle: {
      width: '270px',
@@ -149,7 +151,7 @@ const badgeContainerStyles = {
               <BadgeContainer>
                 <img
                   style={badgeStyle}
-                  src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F2-FoundationalKnowledge.png?alt=media&token=12dd78d9-5588-472d-b15a-879d20bd57ec`}
+                  src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F1-DEIB%20101.png?alt=media&token=6d882a58-f5e9-453e-997b-031e9cce280e`}
                   alt="Badge 1"
                 />
               </BadgeContainer>
@@ -158,7 +160,7 @@ const badgeContainerStyles = {
               <BadgeContainer>
                 <img
                   style={badgeStyle}
-                  src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F1-CreatingCulture.png?alt=media&token=cff9bbcf-af69-44aa-a386-13fd3c10358f`}
+                  src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F2-Inclusive%20Hiring%20Practices.png?alt=media&token=9dc35c84-9902-49ff-af82-8a75a0941894`}
                   alt="Badge 2"
                 />
               </BadgeContainer>
@@ -167,7 +169,7 @@ const badgeContainerStyles = {
               <BadgeContainer>
                 <img
                   style={badgeStyle}
-                  src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F3-InclusiveHiring.png?alt=media&token=985cdbde-0727-4fff-9de9-e75ad81fdc80`}
+                  src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F3-CreatingInclusiveCulture.png?alt=media&token=3cba8e3a-1639-4335-bb9f-3a500736c80b`}
                   alt="Badge 3"
                 />
               </BadgeContainer>
@@ -188,6 +190,13 @@ const badgeContainerStyles = {
               style={{ width: '100%', padding: '10px', backgroundColor: '#004a99', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
             >
               Submit Password
+            </button>
+
+            <button
+              onClick={toRequestPassword}
+              style={{ width: '100%', padding: '10px', backgroundColor: '#82CFDC', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop:'20px' }}
+            >
+            Request Password
             </button>
 
             {isPasswordCorrect && (
@@ -258,9 +267,9 @@ const badgeContainerStyles = {
                       <li>Click Save</li>
                     </ul>
                     </div>
-                  {profileData.c1Complete && <BadgeDownloadButton badgeNumber={1} url="https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F2-FoundationalKnowledge.png?alt=media&token=12dd78d9-5588-472d-b15a-879d20bd57ec" />}
-     {profileData.c2Complete && <BadgeDownloadButton badgeNumber={2} url="https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F1-CreatingCulture.png?alt=media&token=cff9bbcf-af69-44aa-a386-13fd3c10358f" />}
-     {profileData.c3Complete && <BadgeDownloadButton badgeNumber={3} url="https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F3-InclusiveHiring.png?alt=media&token=985cdbde-0727-4fff-9de9-e75ad81fdc80" />}
+                  {profileData.c1Complete && <BadgeDownloadButton badgeNumber={1} url="https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F1-DEIB%20101.png?alt=media&token=6d882a58-f5e9-453e-997b-031e9cce280e" />}
+     {profileData.c2Complete && <BadgeDownloadButton badgeNumber={2} url="https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F2-Inclusive%20Hiring%20Practices.png?alt=media&token=9dc35c84-9902-49ff-af82-8a75a0941894" />}
+     {profileData.c3Complete && <BadgeDownloadButton badgeNumber={3} url="https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F3-CreatingInclusiveCulture.png?alt=media&token=3cba8e3a-1639-4335-bb9f-3a500736c80b" />}
      <h3 style={{ textAlign: 'center', marginTop: '20px' }}>How to Upload Badge to LinkedIn</h3>
      <div style={{ marginBottom: '20px' }}>
        <p>Here's a guide on how to upload your badges to LinkedIn:</p>

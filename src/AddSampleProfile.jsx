@@ -17,14 +17,15 @@ import { storage } from "./firebase";
 import { useState, useEffect  } from "react";
 
 
-function AddProfile(props) {
+function AddSampleProfile(props) {
 
   const profilesCollectionRef = collection(db,"profiles")
   const [newfName, setNewfName] = useState("")
   const [newlName, setNewlName] = useState("")
-  const [hasCompletedCourse1, setHasCompletedCourse1] = useState(true)
+  const [hasCompletedCourse1, setHasCompletedCourse1] = useState(false)
   const [hasCompletedCourse2, setHasCompletedCourse2] = useState(false)
   const [hasCompletedCourse3, setHasCompletedCourse3] = useState(false)
+  const [hasCompletedCourse4, setHasCompletedCourse4] = useState(false)
   const [nextId, setNextId] = useState('');
   const [email, setEmail] = useState("")
 
@@ -48,13 +49,10 @@ function AddProfile(props) {
 
 function test() {
 
-  console.log(hasCompletedCourse1,hasCompletedCourse2,hasCompletedCourse3);
+  console.log(hasCompletedCourse1,hasCompletedCourse2,hasCompletedCourse3,hasCompletedCourse4);
 
 }
 
-function generatePassword() {
-  return Math.random().toString().slice(2, 7);
-}
 
 function handleClick(event) {
   event.preventDefault();
@@ -67,10 +65,10 @@ function handleClick(event) {
 
   // Generate a UUID as the profile ID
   let profileID = v4();
-  const password = generatePassword(); // Generate a unique 5-digit password for each document
+  let password = v4().replace(/-/g, '').slice(0, 5); // Remove dashes and slice to 5 chars
 
   // Add the document to the "profiles" collection
-  addDoc(collection(db, "profiles"), {
+  addDoc(collection(db, "sample-profiles"), {
     profileID: profileID,
     dateAdded: currentDate,
     fname: newfName,
@@ -79,14 +77,12 @@ function handleClick(event) {
     c1Complete: hasCompletedCourse1,
     c2Complete: hasCompletedCourse2,
     c3Complete: hasCompletedCourse3,
+    c4Complete: hasCompletedCourse4,
     badgeID:nextId,
     password: password
   }).then(() => {
     // Successfully added document
     console.log("Profile added successfully");
-    setTimeout(function() {
-    window.location.reload();
-}, 3000)
   }).catch((error) => {
     // Handle error
     console.error("Error adding profile:", error);
@@ -118,7 +114,6 @@ function handleClick(event) {
               }}
             />
             <input
-
               className="form-control"
               id="lname"
               placeholder="Last Name"
@@ -191,4 +186,4 @@ function handleClick(event) {
 }
 
 
-export default AddProfile;
+export default AddSampleProfile;
