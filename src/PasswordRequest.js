@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from './firebase'; // Your Firebase configuration
 import emailjs from '@emailjs/browser'; // Import emailjs
+import { useLocation, useNavigate } from 'react-router-dom'; // Import useLocation and useNavigate
 
 function PasswordRequest() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const location = useLocation(); // Get the current location
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,24 +49,80 @@ function PasswordRequest() {
     }
   };
 
+  const handleBack = () => {
+    const from = new URLSearchParams(location.search).get('from'); // Get the value of the 'from' query parameter
+    if (from) {
+      navigate(from); // Navigate back to the previous page
+    } else {
+      navigate('/'); // Navigate to the home page if 'from' parameter is not provided
+    }
+  };
   return (
-    <div className="password-request-container">
-      <p>
-        Enter the email you applied to the class with to receive a password reset link in your email.
-      </p>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
-          required
-        />
-        <button type="submit">Submit</button>
-      </form>
-      {message && <p>{message}</p>}
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '80vh', // Center vertically in viewport
+      padding: '0 10px', // Add horizontal padding for responsiveness
+      boxSizing: 'border-box',
+    }}>
+      <h2 style={{ fontWeight: 'bold' }}>Password Request Form</h2>
+      <div style={{
+        width: 'calc(100% - 20px)', // Subtract 20px from the width of the viewport
+      }}>
+        <div style={{
+          border: '3px solid #0F2A8E', // Blue border
+          borderRadius: '15px', // 15px corner radius
+          padding: '15px', // Padding inside the container
+          maxWidth: '600px', // Maximum width of the container
+          margin: '0 auto', // Center horizontally
+          boxSizing: 'border-box',
+          
+        }}>
+          <p>
+            Enter the email you applied to the class with below and click submit to receive an email with your password to receive a password reset link in your email.
+          </p>
+          <form onSubmit={handleSubmit} style={{ width: '100%' }}> {/* Ensure form takes full width */}
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+              style={{
+                margin: '10px 0', // Add margin to the input for spacing
+                width: '99%',
+                height: '20px' // Make the input width responsive
+              }}
+            />
+            <button type="submit" style={{
+              margin: '10px 0', // Add margin to the button for spacing
+              width: '100%', // Make the button width responsive
+              backgroundColor: '#0F2A8E',
+              color: 'white', // Text color set to white
+
+
+            }}>Submit</button>
+          </form>
+          {message && <p>{message}</p>}
+          <button
+          onClick={handleBack}
+          style={{
+            margin: '10px 0', // Add margin to the button for spacing
+            width: '100%', // Make the button width responsive
+          }}
+        >
+          Back
+        </button>
+        </div>
+
+      </div>
     </div>
   );
+
+
+
 }
 
 export default PasswordRequest;

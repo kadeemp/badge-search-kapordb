@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from './firebase';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ import './Profile.css';
 const Profile = () => {
   const { id } = useParams();
   const [password, setPassword] = useState('');
+  const location = useLocation(); // Get the current location
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(false);
   const [profileData, setProfileData] = useState({
     fname: '',
@@ -25,7 +26,12 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate('/');
+    const from = new URLSearchParams(location.search).get('from'); // Get the value of the 'from' query parameter
+    if (from) {
+      navigate(from); // Navigate back to the previous page
+    } else {
+      navigate('/'); // Navigate to the home page if 'from' parameter is not provided
+    }
   };
 
   const handlePasswordChange = (e) => {
@@ -42,8 +48,8 @@ const Profile = () => {
   };
 
   const toRequestPassword = () => {
-    navigate("/request-password")
-  }
+    navigate(`/request-password?from=${window.location.pathname}`); // Pass the current location as a query parameter
+  };
 
   useEffect(() => {
     const fetchData = async () => {
