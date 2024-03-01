@@ -16,6 +16,7 @@ function PasswordRequest() {
     // Initialize your EmailJS
     emailjs.init('Vqoy3Ij2lFPOK5d78'); // Replace 'YOUR_PUBLIC_KEY' with your actual public key
 
+//use this code to search for profiles
     const profilesRef = collection(db, "profiles");
     const q = query(profilesRef, where("email", "==", email));
 
@@ -32,7 +33,6 @@ function PasswordRequest() {
         to_email: email, // The recipient email address
         code: password, // The password code you're sending
       };
-
       // Send the email with the password code
       emailjs.send('service_4q397vv', 'template_ayywfj3', emailParams)
         .then((response) => {
@@ -64,8 +64,9 @@ function PasswordRequest() {
       justifyContent: 'center',
       alignItems: 'center',
       minHeight: '80vh', // Center vertically in viewport
-      padding: '0 10px', // Add horizontal padding for responsiveness
+      padding: '0 30px', // Add horizontal padding for responsiveness
       boxSizing: 'border-box',
+      transform: 'translateX(200px)', // Move the container to the right by 200px
     }}>
       <h2 style={{ fontWeight: 'bold' }}>Password Request Form</h2>
       <div style={{
@@ -78,7 +79,7 @@ function PasswordRequest() {
           maxWidth: '600px', // Maximum width of the container
           margin: '0 auto', // Center horizontally
           boxSizing: 'border-box',
-          
+
         }}>
           <p>
             Enter the email you applied to the class with below and click submit to receive an email with your password to receive a password reset link in your email.

@@ -5,6 +5,91 @@ import { db } from './firebase';
 import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 
+
+const BadgeContainer = ({ children }) => (
+  <div className="badge-container">{children}</div>
+);
+
+
+
+// Helper component to render badge download buttons
+const BadgeDownloadButton = ({ badgeNumber, url }) => (
+  <a href={url} download={`Badge${badgeNumber}.png`}>
+    <button style={{ width: '100%', padding: '10px', margin: '10px 0', backgroundColor: '#004a99', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+      Download Badge {badgeNumber}
+    </button>
+  </a>
+);
+const themeColors = {
+ primary: '#004a99',
+ secondary: '#ccc',
+ text: '#003366',
+ background: '#f9f9f9',
+ border: '#004a99',
+};
+
+const styles = {
+ card: {
+   margin: '30px auto 30px',
+   width: '70%',
+   marginBottom: '20px',
+   border: `2px solid ${themeColors.border}`,
+   backgroundColor: themeColors.background,
+   borderRadius: '15px'
+ },
+ cardTitle: {
+   paddingTop: '20px',
+   paddingLeft: '40px',
+   color: themeColors.text,
+   textAlign: 'left'
+ },
+ cardBody: {
+   textAlign: 'left',
+   padding: '25px',
+ },
+ badgeStyle: {
+   width: '270px',
+   height: '270px',
+ },
+
+ button: {
+   width: '50%',
+   padding: '0px',
+   backgroundColor: themeColors.primary,
+   color: 'white',
+   border: 'none',
+   borderRadius: '5px',
+   cursor: 'pointer',
+   margin: '10px 0',
+   fontWeight: 'bold'
+
+ },
+
+ backButton: {
+   width: '40%',
+   padding: '16px',
+   backgroundColor: themeColors.secondary,
+   color: 'white',
+   border: 'none',
+   borderRadius: '5px',
+   cursor: 'pointer',
+   margin: '5px 0',
+   marginBottom: '30px',
+   textAlign: 'center',
+   fontWeight: 'bold'
+ },
+ backButtonContainer: {
+    display: 'flex',
+    justifyContent: 'left', // centers the button horizontally
+    alignItems: 'left', // centers the button vertically
+    width: '100%',
+    paddingLeft: '25px'
+
+  },
+
+};
+
+
 const Profile = () => {
   const { id } = useParams();
   const [password, setPassword] = useState('');
@@ -22,6 +107,8 @@ const Profile = () => {
     c3Complete: false,
     c4Complete: false,
   });
+  const [email, setEmail] = useState('');
+
   const badgeStyle = { width: '270px', height: '270px' };
   const navigate = useNavigate();
 
@@ -35,7 +122,7 @@ const Profile = () => {
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    setEmail(e.target.value);
   };
 
   const checkPassword = () => {
@@ -47,9 +134,25 @@ const Profile = () => {
     }
   };
 
-  const toRequestPassword = () => {
-    navigate(`/request-password?from=${window.location.pathname}`); // Pass the current location as a query parameter
-  };
+  const checkEmail = async () => {
+
+    console.log(email);
+
+    const lowercaseEmail = email.toLowerCase();
+    const profilesRef = collection(db, "profiles");
+    const q = query(profilesRef, where("email", "==", lowercaseEmail));
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      const profile = querySnapshot.docs[0].data(); // Assuming email is unique and grabbing the first match
+      // const password = profile.password; // Assuming the document has a 'password' field
+      // const fname = profile.fname;
+
+      setProfileData(profile);
+        setIsPasswordCorrect(true);
+      } else {
+        setIsPasswordCorrect(false);
+      }
+    };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,91 +168,13 @@ const Profile = () => {
     fetchData();
   }, [id]);
 
-  const BadgeContainer = ({ children }) => (
-    <div className="badge-container">{children}</div>
-  );
-
-
-
-  // Helper component to render badge download buttons
-  const BadgeDownloadButton = ({ badgeNumber, url }) => (
-    <a href={url} download={`Badge${badgeNumber}.png`}>
-      <button style={{ width: '100%', padding: '10px', margin: '10px 0', backgroundColor: '#004a99', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-        Download Badge {badgeNumber}
-      </button>
-    </a>
-  );
-  const themeColors = {
-   primary: '#004a99',
-   secondary: '#ccc',
-   text: '#003366',
-   background: '#f9f9f9',
-   border: '#004a99',
- };
-
- const styles = {
-   card: {
-     margin: '30px auto 30px',
-     width: '70%',
-     marginBottom: '20px',
-     border: `2px solid ${themeColors.border}`,
-     backgroundColor: themeColors.background,
-     borderRadius: '15px'
-   },
-   cardTitle: {
-     paddingTop: '20px',
-     paddingLeft: '20px',
-     color: themeColors.text,
-     textAlign: 'center'
-   },
-   cardBody: {
-     textAlign: 'center',
-     padding: '25px',
-   },
-   badgeStyle: {
-     width: '270px',
-     height: '270px',
-   },
-
-   button: {
-     width: '100%',
-     padding: '0px',
-     backgroundColor: themeColors.primary,
-     color: 'white',
-     border: 'none',
-     borderRadius: '5px',
-     cursor: 'pointer',
-     margin: '10px 0',
-     fontWeight: 'bold'
-
-   },
-
-   backButton: {
-     width: '94%',
-     padding: '10px',
-     backgroundColor: themeColors.secondary,
-     color: 'white',
-     border: 'none',
-     borderRadius: '5px',
-     cursor: 'pointer',
-     margin: '30px 0',
-     textAlign: 'center',
-     fontWeight: 'bold'
-   },
-   backButtonContainer: {
-      display: 'flex',
-      justifyContent: 'center', // centers the button horizontally
-      alignItems: 'center', // centers the button vertically
-      width: '100%'
-    },
-
- };
 
   return (
     <div>
     <div className="card" style={styles.card}>
        <h1 className="card-title" style={styles.cardTitle}>{profileData.fname} {profileData.lname}</h1>
        <div className="card-body" style={styles.cardBody}>
+
 
           {/* Optional Badges */}
           <div className="badge-container">
@@ -182,28 +207,27 @@ const Profile = () => {
             )}
           </div>
 
+          <div>
 
-          <div style={{ marginTop: '20px' }}>
-            <input
-              placeholder="Enter Password"
-              type="password"
-              value={password}
-              onChange={handlePasswordChange}
-              style={{ width: '97%', padding: '10px', margin: '20px 0' }}
-            />
-            <button
-              onClick={checkPassword}
-              style={{ width: '100%', padding: '10px', backgroundColor: '#004a99', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
-            >
-              Submit Password
-            </button>
+          {!isPasswordCorrect && (
+    <div>
+      Enter the email you used to sign up for the class below. ⬇️
+      <input
+        placeholder="Enter Email"
+        type="email"
+        value={email}
+        onChange={handlePasswordChange}
+        style={{ width: '97%', padding: '10px', margin: '20px 0' }}
+      />
+      <button
+        onClick={checkEmail}
+        style={{ width: '42.2%', padding: '10px', backgroundColor: '#004a99', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
+      >
+        Submit Email
+      </button>
+    </div>
+  )}
 
-            <button
-              onClick={toRequestPassword}
-              style={{ width: '100%', padding: '10px', backgroundColor: '#82CFDC', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop:'20px' }}
-            >
-            Request Password
-            </button>
 
             {isPasswordCorrect && (
               <>
@@ -274,8 +298,8 @@ const Profile = () => {
                     </ul>
                     </div>
                   {profileData.c1Complete && <BadgeDownloadButton badgeNumber={1} url="https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F1-DEIB%20101.png?alt=media&token=6d882a58-f5e9-453e-997b-031e9cce280e" />}
-     {profileData.c2Complete && <BadgeDownloadButton badgeNumber={2} url="https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F2-Inclusive%20Hiring%20Practices.png?alt=media&token=9dc35c84-9902-49ff-af82-8a75a0941894" />}
-     {profileData.c3Complete && <BadgeDownloadButton badgeNumber={3} url="https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F3-CreatingInclusiveCulture.png?alt=media&token=3cba8e3a-1639-4335-bb9f-3a500736c80b" />}
+                  {profileData.c2Complete && <BadgeDownloadButton badgeNumber={2} url="https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F2-Inclusive%20Hiring%20Practices.png?alt=media&token=9dc35c84-9902-49ff-af82-8a75a0941894" />}
+                  {profileData.c3Complete && <BadgeDownloadButton badgeNumber={3} url="https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F3-CreatingInclusiveCulture.png?alt=media&token=3cba8e3a-1639-4335-bb9f-3a500736c80b" />}
      <h3 style={{ textAlign: 'center', marginTop: '20px' }}>How to Upload Badge to LinkedIn</h3>
      <div style={{ marginBottom: '20px' }}>
        <p>Here's a guide on how to upload your badges to LinkedIn:</p>

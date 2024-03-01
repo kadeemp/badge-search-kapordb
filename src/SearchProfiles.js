@@ -43,7 +43,7 @@ const SearchPage = () => {
     <br/>
       <div style={{ border: '2px solid #004a99', padding: '20px', margin: '20px auto', maxWidth: '800px', textAlign: 'left', backgroundColor: '#f9f9f9', borderRadius: '15px'   }}>
         <h2 style={{ borderBottom: '1px solid #004a99', paddingBottom: '10px' }}>Welcome to the DEIB for Startups Badge Verification Platform!</h2>
-        <p style={{ color: 'black'}}>Congratulations to all the trailblazers who've successfully completed the program! Here, we make it easy to verify the courses that you have completed.</p>
+        <p style={{ color: 'black'}}>Congratulations to all the trailblazers who've successfully completed the program! Use the form below to find your profile and download your badges.</p>
 
         <h3>How to Verify Your Badges:</h3>
         <ol style={{ marginLeft: '1.5rem' , color: 'black'}}>
