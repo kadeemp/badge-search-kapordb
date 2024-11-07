@@ -21,17 +21,17 @@ return (
             <div style={{display: 'flex', alignItems: 'center' }} >
             {props.c1Complete && (
               <div>
-                <img style={badgeStyle} src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F2-FoundationalKnowledge.png?alt=media&token=12dd78d9-5588-472d-b15a-879d20bd57ec`} alt="Badge 1" />
+                <img style={badgeStyle} src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F1-DEIB%20101.png?alt=media&token=6d882a58-f5e9-453e-997b-031e9cce280e`} alt="Badge 1" />
               </div>
             )}
             {props.c2Complete && (
               <div>
-                <img style={badgeStyle} src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F1-CreatingCulture.png?alt=media&token=cff9bbcf-af69-44aa-a386-13fd3c10358f`} alt="Badge 2" />
+                <img style={badgeStyle} src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F2-Inclusive%20Hiring%20Practices.png?alt=media&token=9dc35c84-9902-49ff-af82-8a75a0941894`} alt="Badge 2" />
               </div>
             )}
             {props.c3Complete && (
               <div>
-                <img style={badgeStyle} src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F3-InclusiveHiring.png?alt=media&token=985cdbde-0727-4fff-9de9-e75ad81fdc80`} alt="Badge 3" />
+                <img style={badgeStyle} src={`https://firebasestorage.googleapis.com/v0/b/deib-for-startups.appspot.com/o/badges%2F3-CreatingInclusiveCulture.png?alt=media&token=3cba8e3a-1639-4335-bb9f-3a500736c80b`} alt="Badge 3" />
               </div>
             )}
             {props.c4Complete && (

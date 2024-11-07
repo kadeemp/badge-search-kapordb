@@ -95,6 +95,8 @@ const Profile = () => {
   const [password, setPassword] = useState('');
   const location = useLocation(); // Get the current location
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(false);
+  const [isEmailCorrect, setIsEmailCorrect] = useState(true);
+
   const [profileData, setProfileData] = useState({
     fname: '',
     lname: '',
@@ -125,14 +127,6 @@ const Profile = () => {
     setEmail(e.target.value);
   };
 
-  const checkPassword = () => {
-
-    if (profileData.password === password) {
-      setIsPasswordCorrect(true);
-    } else {
-      setIsPasswordCorrect(false);
-    }
-  };
 
   const checkEmail = async () => {
 
@@ -151,7 +145,9 @@ const Profile = () => {
         setIsPasswordCorrect(true);
       } else {
         setIsPasswordCorrect(false);
+        setIsEmailCorrect(false)
       }
+      console.log(isEmailCorrect);
     };
 
   useEffect(() => {
@@ -210,8 +206,13 @@ const Profile = () => {
           <div>
 
           {!isPasswordCorrect && (
+
     <div>
-      Enter the email you used to sign up for the class below. ⬇️
+    <h3 style={{ textAlign: 'center', marginTop: '20px' }}>Badge Earning Criteria</h3>
+    <div>
+      <p style={{ width: '70%', margin: '0 auto', textAlign: 'center' }}>Badges are awarded to participants who completed 80% or more of each course. If you see any issues with your profile, please email us at <strong>Twi@kaporcenter.org</strong> </p>
+      </div>
+    <p  style={{ marginTop: '20px',marginBottom:'-5px'}}>   Enter the <strong>email</strong> you used to sign up <strong>for the class</strong> below. ⬇️ </p>
       <input
         placeholder="Enter Email"
         type="email"
@@ -219,12 +220,16 @@ const Profile = () => {
         onChange={handlePasswordChange}
         style={{ width: '97%', padding: '10px', margin: '20px 0' }}
       />
+      {!isEmailCorrect && (
+      <p style={{ color: 'red', textAlign: 'center'}}>The email you submitted didn't match. Please try again or email us at <strong>Twi@kaporcenter.org</strong></p>
+    )}
       <button
         onClick={checkEmail}
         style={{ width: '42.2%', padding: '10px', backgroundColor: '#004a99', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
       >
         Submit Email
       </button>
+
     </div>
   )}
 
@@ -234,10 +239,7 @@ const Profile = () => {
                 {profileData.c1Complete && profileData.c2Complete && profileData.c3Complete ? (
 
                   <div>
-                  <h3 style={{ textAlign: 'center', marginTop: '20px' }}>Badge Earning Criteria</h3>
-                  <div style={{ marginBottom: '20px' }}>
-                    <p>Badges are awarded to participants who completed 80% or more of each course. </p>
-                    </div>
+
                   <h3 style={{ textAlign: 'center', marginTop: '20px' }}>How to Download Badge</h3>
                   <div style={{ marginBottom: '20px' }}>
                     <p>Once you've clicked on the link below, you can follow these steps to download each badge:</p>
@@ -275,9 +277,9 @@ const Profile = () => {
                      </ul>
                      <p>Lastly, you'll upload the badge images by clicking "+Add Media", then "Upload Media." Please upload them with the following titles:</p>
                      <ul>
-                       <li>Badge 1: Foundational Knowledge</li>
-                       <li>Badge 2: Inclusive Hiring</li>
-                       <li>Badge 3: Inclusive Culture</li>
+                       <li>Badge 1: DEIB 101</li>
+                       <li>Badge 2: Inclusive Hiring Practices</li>
+                       <li>Badge 3: Creating Inclusive Culture</li>
                      </ul>
                     </div>
                   </div>
